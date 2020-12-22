@@ -1,11 +1,20 @@
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      Hello
-    </div>
-  );
+import Main from "./components/Main.js";
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <div>
+        <Main />
+      </div>
+    );
+  }
 }
 
 export default App;
