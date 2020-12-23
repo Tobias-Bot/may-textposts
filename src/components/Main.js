@@ -1,6 +1,10 @@
 import React from "react";
 import bridge from "@vkontakte/vk-bridge";
 
+import Post from "./Post";
+
+import "../App.css";
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +16,7 @@ class Main extends React.Component {
     this.currOffset = 0;
 
     this.loadPosts = this.loadPosts.bind(this);
+    this.getPosts = this.getPosts.bind(this);
   }
 
   componentDidMount() {
@@ -30,27 +35,46 @@ class Main extends React.Component {
         bridge
           .send("VKWebAppCallAPIMethod", {
             method: "photos.get",
-            request_id: this.currOffset,
             params: {
               owner_id: "-199824380",
               album_id: "276543931",
               count: this.offset,
               offset: this.currOffset,
-              v: "5.73",
+              v: "5.76",
               access_token: token,
             },
           })
           .then((r) => {
-            this.setState({ posts: r.items });
-            console.log(r);
+            this.setState({ posts: r.response.items });
           });
       });
   }
 
-  render() {
-    
+  getPosts() {
+    let posts = this.state.posts;
 
-    return <div>Hello</div>;
+    let response = posts.map((post) => {
+      let obj = {
+        text: post.text,
+        picUrl: post.photo_807,
+        url: "photo_" + post.owner_id + "_" + post.id,
+      };
+
+      return <Post key={post.id} data={obj} />;
+    });
+
+    return response;
+  }
+
+  render() {
+    let posts = this.getPosts();
+
+    return (
+      <div>
+        <div className="Header"></div>
+        <div>{posts}</div>
+      </div>
+    );
   }
 }
 
