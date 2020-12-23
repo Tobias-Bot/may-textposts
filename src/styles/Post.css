@@ -36,6 +36,7 @@
 
 .ShareBtn {
   position: relative;
+  display: inline;
   padding: 3px 10px;
   background-color: white;
   color: #414569;

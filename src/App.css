@@ -1,3 +1,7 @@
+.modal-dialog-centered.modal-dialog-scrollable .modal-content {
+  max-height: 80%;
+}
+
 .Header {
   position: fixed;
   top: 0;

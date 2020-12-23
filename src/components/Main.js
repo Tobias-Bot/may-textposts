@@ -1,5 +1,6 @@
 import React from "react";
 import bridge from "@vkontakte/vk-bridge";
+import qs from "querystring";
 
 import Post from "./Post";
 
@@ -10,17 +11,31 @@ class Main extends React.Component {
     super(props);
     this.state = {
       posts: [],
+      friends: [],
+
+      submitProfile: "",
+      submitPost: {},
     };
 
     this.offset = 50;
     this.currOffset = 0;
+    this.user_id = 0;
+    this.token = "";
+    this.comToken =
+      "9207d0b2bd3f2aafef7faed922b0125cf19a50468cd7851677ce381757bf24f9ea367d8700be600466816";
 
     this.loadPosts = this.loadPosts.bind(this);
     this.getPosts = this.getPosts.bind(this);
+    this.setProfile = this.setProfile.bind(this);
   }
 
   componentDidMount() {
     this.loadPosts();
+
+    const params = window.location.search.slice(1);
+    const obj = qs.parse(params);
+
+    this.user_id = obj.vk_user_id;
   }
 
   loadPosts() {
@@ -30,7 +45,7 @@ class Main extends React.Component {
         scope: "photos",
       })
       .then((data) => {
-        let token = data.access_token;
+        this.token = data.access_token;
 
         bridge
           .send("VKWebAppCallAPIMethod", {
@@ -41,13 +56,17 @@ class Main extends React.Component {
               count: this.offset,
               offset: this.currOffset,
               v: "5.76",
-              access_token: token,
+              access_token: this.token,
             },
           })
           .then((r) => {
             this.setState({ posts: r.response.items });
           });
       });
+  }
+
+  setProfile(profile) {
+    this.setState({ submitProfiles: profile });
   }
 
   getPosts() {
@@ -71,6 +90,7 @@ class Main extends React.Component {
 
     return (
       <div>
+
         <div className="Header"></div>
         <div>{posts}</div>
       </div>
