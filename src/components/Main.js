@@ -1,98 +1,144 @@
 import React from "react";
-import bridge from "@vkontakte/vk-bridge";
+//import bridge from "@vkontakte/vk-bridge";
 import qs from "querystring";
+import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
 
-import Post from "./Post";
+import DepressionTest from "./DepressionTest";
+import EmpathyTest from "./EmpathyTest";
 
 import "../App.css";
+
+import testsInfo from "../data/testsInfo.js";
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      friends: [],
-
-      submitProfile: "",
-      submitPost: {},
+      testInfo: "",
+      headerStyles: {},
     };
 
-    this.offset = 50;
-    this.currOffset = 0;
-    this.user_id = 0;
-    this.token = "";
-    this.comToken =
-      "9207d0b2bd3f2aafef7faed922b0125cf19a50468cd7851677ce381757bf24f9ea367d8700be600466816";
-
-    this.loadPosts = this.loadPosts.bind(this);
-    this.getPosts = this.getPosts.bind(this);
-    this.setProfile = this.setProfile.bind(this);
+    this.getTests = this.getTests.bind(this);
+    this.setModalText = this.setModalText.bind(this);
+    this.getHeaderStyle = this.getHeaderStyle.bind(this);
   }
 
   componentDidMount() {
-    this.loadPosts();
-
-    const params = window.location.search.slice(1);
-    const obj = qs.parse(params);
-
-    this.user_id = obj.vk_user_id;
+    this.setState({ headerStyles: this.getHeaderStyle() });
   }
 
-  loadPosts() {
-    bridge
-      .send("VKWebAppGetAuthToken", {
-        app_id: 7706189,
-        scope: "photos",
-      })
-      .then((data) => {
-        this.token = data.access_token;
+  getHeaderStyle() {
+    const str = window.location.search.slice(1);
+    const objParams = qs.parse(str);
 
-        bridge
-          .send("VKWebAppCallAPIMethod", {
-            method: "photos.get",
-            params: {
-              owner_id: "-199824380",
-              album_id: "276543931",
-              count: this.offset,
-              offset: this.currOffset,
-              v: "5.76",
-              access_token: this.token,
-            },
-          })
-          .then((r) => {
-            this.setState({ posts: r.response.items });
-          });
-      });
-  }
+    let platform = objParams.vk_platform;
 
-  setProfile(profile) {
-    this.setState({ submitProfiles: profile });
-  }
-
-  getPosts() {
-    let posts = this.state.posts;
-
-    let response = posts.map((post) => {
-      let obj = {
-        text: post.text,
-        picUrl: post.photo_807,
-        url: "photo_" + post.owner_id + "_" + post.id,
+    if (platform === "mobile_iphone") {
+      return {
+        header: {
+          height: "70px",
+          paddingTop: "30px",
+        },
+        body: {
+          paddingTop: "70px",
+        },
       };
+    } else {
+      return {};
+    }
+  }
 
-      return <Post key={post.id} data={obj} />;
+  setModalText(text) {
+    this.setState({ testInfo: text });
+  }
+
+  getTests() {
+    let response = testsInfo.map((test, i) => {
+      return (
+        <div
+          key={i}
+          className="testView"
+          style={{ backgroundColor: test.color }}
+        >
+          <div className="testTitle">{test.title}</div>
+          <button
+            type="button"
+            className="infoBtn"
+            style={{ backgroundColor: test.color }}
+            data-toggle="modal"
+            data-target="#infoModal"
+            onClick={(e) => this.setModalText(test.text, e)}
+          >
+            <i className="fas fa-info-circle"></i> инфо
+          </button>
+          <br />
+          <NavLink to={test.url}>
+            <button
+              type="button"
+              className="testComeInBtn"
+              style={{ borderColor: test.color, color: test.color }}
+            >
+              пройти тест
+            </button>
+          </NavLink>
+          <div className="testCount">
+            кол-во вопросов: {test.questionsCount}
+          </div>
+        </div>
+      );
     });
 
     return response;
   }
 
   render() {
-    let posts = this.getPosts();
+    let tests = this.getTests();
+    let styles = this.state.headerStyles;
 
     return (
       <div>
+        <div className="modal fade" id="infoModal" tabIndex="-1" role="dialog">
+          <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">О тесте</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="testText">{this.state.testInfo}</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div className="Header"></div>
-        <div>{posts}</div>
+        <div className="Header" style={styles.header}>
+          Мαú-тесты
+        </div>
+        <div className="Body" style={styles.body}>
+          <HashRouter>
+            <Switch>
+              <Route exact path="/">
+                {tests}
+              </Route>
+              <Route exact path="/test-depression">
+                <DepressionTest />
+              </Route>
+              <Route exact path="/test-empathy">
+                <EmpathyTest />
+              </Route>
+            </Switch>
+          </HashRouter>
+          <a href="https://vk.com/warmay" className="linkStyle">
+            <div className="copyrightText">Май</div>
+          </a>
+        </div>
       </div>
     );
   }
