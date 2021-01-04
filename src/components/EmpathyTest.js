@@ -130,7 +130,7 @@ class EmpathyTest extends React.Component {
         поведение близких и принимать их проблемы как свои.`;
         break;
       case sum <= 11:
-        text = `очень низкий уровень. Эмпатийные тенденции личности не развиты. Особенно
+        text = `Очень низкий уровень. Эмпатийные тенденции личности не развиты. Особенно
         трудны контакты с детьми и лицами, которые намного старше вас. В межличностных
         отношениях нередко оказываетесь в неловком положении. Во многом не находите взаимопонимания
         с окружающими. Любите острые ощущения, спортивные состязания предпочитаете искусству.
@@ -148,7 +148,9 @@ class EmpathyTest extends React.Component {
   }
 
   shareTest() {
-    bridge.send("VKWebAppShare");
+    bridge.send("VKWebAppShare", {
+      link: "https://vk.com/app7713167#test-empathy",
+    });
   }
 
   render() {
@@ -213,6 +215,13 @@ class EmpathyTest extends React.Component {
             </div>
           )}
         </div>
+        {!showResults ? (
+          <NavLink to="/" className="linkStyle">
+            <div className="testAbortBtn">выйти в меню</div>
+          </NavLink>
+        ) : (
+          ""
+        )}
         {showResults ? (
           <div>
             <div className="icon" onClick={this.shareTest}>

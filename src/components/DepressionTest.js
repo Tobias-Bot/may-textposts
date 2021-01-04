@@ -98,7 +98,7 @@ class DepressionTest extends React.Component {
           незначительными или даже совсем отсутствовать. Пациент, как правило, не осознаёт
           депрессивного расстройства. Часто он убежден в наличии у себя какого-либо редкого
           и трудно диагностируемого соматического заболевания, либо имеет какие-либо
-          невротические симптомы, расстройства биологического ритма и т. п.`;
+          невротические симптомы, расстройства биологического ритма и т.п.`;
         break;
       case sum >= 70:
         text = `Истинное депрессивное состояние. Основными признаками такого состояния являются
@@ -118,7 +118,9 @@ class DepressionTest extends React.Component {
   }
 
   shareTest() {
-    bridge.send("VKWebAppShare");
+    bridge.send("VKWebAppShare", {
+      link: "https://vk.com/app7713167#test-depression",
+    });
   }
 
   render() {
@@ -177,6 +179,13 @@ class DepressionTest extends React.Component {
             </div>
           )}
         </div>
+        {!showResults ? (
+          <NavLink to="/" className="linkStyle">
+            <div className="testAbortBtn">выйти в меню</div>
+          </NavLink>
+        ) : (
+          ""
+        )}
         {showResults ? (
           <div>
             <div className="icon" onClick={this.shareTest}>

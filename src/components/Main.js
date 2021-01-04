@@ -5,6 +5,7 @@ import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
 
 import DepressionTest from "./DepressionTest";
 import EmpathyTest from "./EmpathyTest";
+import ColorLoveTest from "./ColorLoveTest";
 
 import "../App.css";
 
@@ -132,6 +133,9 @@ class Main extends React.Component {
               </Route>
               <Route exact path="/test-empathy">
                 <EmpathyTest />
+              </Route>
+              <Route exact path="/test-colorlove">
+                <ColorLoveTest />
               </Route>
             </Switch>
           </HashRouter>

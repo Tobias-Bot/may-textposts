@@ -12,7 +12,7 @@
 
 .QuestionView {
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   margin-top: 20px;
   border-radius: 10px;
   text-align: center;
@@ -58,7 +58,7 @@
 .AnswerBtn {
   width: 100%;
   padding: 5px 10px 6px 10px;
-  margin: 5px 0px;
+  margin: 6px 6px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
@@ -75,13 +75,13 @@
 
 .icon {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 10px;
-  font-size: 35px;
+  display: inline-block;
+  width: 120px;
+  margin: 20px;
+  font-size: 25px;
   text-align: center;
-  border-radius: 10px;
-  padding: 10px 10px;
+  border-radius: 100px;
+  padding: 10px;
   background-color: rgb(37, 37, 51);
   color: #cbcfff;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
@@ -93,16 +93,16 @@
   background-color: #adb4ff;
 }
 
-.iconTitle {
+.testAbortBtn {
   position: relative;
-  display: block;
-  margin-top: 10px;
+  display: inline-block;
+  width: 90%;
   text-align: center;
+  font-size: 18px;
   font-weight: 500;
-  font-size: 15px;
-  padding: 3px;
-  border-radius: 30px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+  text-align: center;
+  color: #b9bfff;
 }
 
 .copyrightText {
