@@ -2,11 +2,11 @@ import React from "react";
 import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
-import DepressionTestData from "../data/DepressionTestData";
+import EQTestData from "../data/EQTestData";
 
 import "../styles/TestPage.css";
 
-class DepressionTest extends React.Component {
+class EQTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,14 +25,14 @@ class DepressionTest extends React.Component {
 
   getQuestion() {
     let index = this.state.questionNum;
-    let len = DepressionTestData.length;
+    let len = EQTestData.length;
 
     let response = (
       <div>
         <div className="Counter">
           вопрос {index} из {len}
         </div>
-        <div className="Text">{DepressionTestData[index - 1].text}</div>
+        <div className="Text">{EQTestData[index - 1].text}</div>
       </div>
     );
 
@@ -43,12 +43,12 @@ class DepressionTest extends React.Component {
     let questionNum = this.state.questionNum + 1;
     let sum = this.state.answerSum;
 
-    if (questionNum <= DepressionTestData.length) {
-      let text = DepressionTestData[questionNum - 1].text;
+    if (questionNum <= EQTestData.length) {
+      let text = EQTestData[questionNum - 1].text;
 
       this.setState({ questionNum, text });
 
-      if (DepressionTestData[questionNum - 2].revert) {
+      if (EQTestData[questionNum - 2].revert) {
         switch (score) {
           case 1:
             sum += 4;
@@ -187,13 +187,15 @@ class DepressionTest extends React.Component {
           ""
         )}
         {showResults ? (
-          <div style={{ textAlign: "center" }}>
+          <div>
             <div className="icon" onClick={this.shareTest}>
               <i className="fas fa-share-square"></i>
+              <div className="iconTitle">поделиться тестом</div>
             </div>
             <NavLink to="/" className="linkStyle">
               <div className="icon">
                 <i className="fas fa-stream"></i>
+                <div className="iconTitle">вернуться к тестам</div>
               </div>
             </NavLink>
           </div>
@@ -205,4 +207,4 @@ class DepressionTest extends React.Component {
   }
 }
 
-export default DepressionTest;
+export default EQTest;

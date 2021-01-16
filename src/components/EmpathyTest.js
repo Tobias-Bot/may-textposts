@@ -223,15 +223,13 @@ class EmpathyTest extends React.Component {
           ""
         )}
         {showResults ? (
-          <div>
+          <div style={{ textAlign: "center" }}>
             <div className="icon" onClick={this.shareTest}>
               <i className="fas fa-share-square"></i>
-              <div className="iconTitle">поделиться тестом</div>
             </div>
             <NavLink to="/" className="linkStyle">
               <div className="icon">
                 <i className="fas fa-stream"></i>
-                <div className="iconTitle">вернуться к тестам</div>
               </div>
             </NavLink>
           </div>
