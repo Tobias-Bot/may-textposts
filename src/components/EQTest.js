@@ -15,6 +15,12 @@ class EQTest extends React.Component {
 
       showResults: false,
       answerSum: 0,
+
+      p1: 0,
+      p2: 0,
+      p3: 0,
+      p4: 0,
+      p5: 0,
     };
 
     this.getQuestion = this.getQuestion.bind(this);
@@ -43,31 +49,61 @@ class EQTest extends React.Component {
     let questionNum = this.state.questionNum + 1;
     let sum = this.state.answerSum;
 
+    let p1 = this.state.p1;
+    let p2 = this.state.p2;
+    let p3 = this.state.p3;
+    let p4 = this.state.p4;
+    let p5 = this.state.p5;
+
     if (questionNum <= EQTestData.length) {
       let text = EQTestData[questionNum - 1].text;
 
       this.setState({ questionNum, text });
 
-      if (EQTestData[questionNum - 2].revert) {
-        switch (score) {
-          case 1:
-            sum += 4;
-            break;
-          case 2:
-            sum += 3;
-            break;
-          case 3:
-            sum += 2;
-            break;
-          case 4:
-            sum += 1;
-            break;
-        }
-      } else {
-        sum += score;
-      }
+      let val = questionNum - 1;
 
-      this.setState({ answerSum: sum });
+      if (
+        val === 1 ||
+        val === 2 ||
+        val === 4 ||
+        val === 17 ||
+        val === 19 ||
+        val === 25
+      )
+        p1 += score;
+      if (
+        val === 3 ||
+        val === 7 ||
+        val === 8 ||
+        val === 10 ||
+        val === 18 ||
+        val === 30
+      )
+        p2 += score;
+      if (
+        val === 5 ||
+        val === 6 ||
+        val === 13 ||
+        val === 14 ||
+        val === 16 ||
+        val === 22
+      )
+        p3 += score;
+      if (
+        val === 9 ||
+        val === 11 ||
+        val === 20 ||
+        val === 21 ||
+        val === 23 ||
+        val === 28
+      )
+        p4 += score;
+      if (val === 12 || val === 15 || val === 24 || val === 26 || val === 27)
+        p5 += score;
+
+      sum += score;
+
+      this.setState({ answerSum: sum, p1, p2, p3, p4, p5 });
     } else {
       this.setState({ text: "результаты теста", showResults: true });
     }
@@ -75,51 +111,40 @@ class EQTest extends React.Component {
 
   getTestResults() {
     let sum = this.state.answerSum;
-    let scores = Math.round((sum * 100) / 80);
+    let p1 = Math.round((this.state.p1 * 100) / 18);
+    let p2 = Math.round((this.state.p2 * 100) / 18);
+    let p3 = Math.round((this.state.p3 * 100) / 18);
+    let p4 = Math.round((this.state.p4 * 100) / 18);
+    let p5 = Math.round((this.state.p5 * 100) / 15);
+    let scores = Math.round((sum * 100) / 90);
     let text = "";
 
     switch (true) {
-      case sum <= 50:
-        text = "Состояние без депрессии";
-        break;
-      case sum > 50 && sum <= 59:
-        text = `Состояние легкой депрессии ситуативного или невротического генеза.
-        Невротическая депрессия  (или ситуационная депрессия) это один из видов
-        нарушений психо-эмоционального состояния личности, зачастую имеющего
-        ситуационный характер. Данное заболевание включает в себя проявления сразу
-        двух психологических заболеваний: невроза и депрессии. Тем не менее, этот
-        факт не указывает на особую тяжесть заболевания, а лишь определяет
-        особенности протекания и симптомы.`;
-        break;
-      case sum >= 60 && sum <= 69:
-        text = `Субдепрессивное состояние или маскированная депрессия. При маскированной
-        депрессии классические аффективные компоненты депрессии (пониженный эмоциональный
-          фон, апатия, уход от контактов с внешним миром и т. д.) могут быть очень
-          незначительными или даже совсем отсутствовать. Пациент, как правило, не осознаёт
-          депрессивного расстройства. Часто он убежден в наличии у себя какого-либо редкого
-          и трудно диагностируемого соматического заболевания, либо имеет какие-либо
-          невротические симптомы, расстройства биологического ритма и т.п.`;
-        break;
       case sum >= 70:
-        text = `Истинное депрессивное состояние. Основными признаками такого состояния являются
-        сниженное настроение и снижение или утрата способности получать удовольствие (ангедония).
-        Обычно также присутствуют некоторые из следующих симптомов: сниженная самооценка,
-        неадекватное чувство вины, пессимизм, нарушение концентрации внимания, усталость или
-        отсутствие энергии, расстройства сна и аппетита, суицидальные тенденции. Тяжёлые формы
-        депрессии характеризуются так называемой «депрессивной триадой»: снижением настроения,
-        заторможенностью мышления и двигательной заторможенностью.`;
+        text = "Высокий уровень эмоционального интеллекта";
+        break;
+      case sum >= 49 && sum <= 69:
+        text = "Средний уровень эмоционального интеллекта";
+        break;
+      case sum <= 39:
+        text = "Низкий уровень эмоционального интеллекта";
         break;
     }
 
     return {
       scores,
       text,
+      p1,
+      p2,
+      p3,
+      p4,
+      p5,
     };
   }
 
   shareTest() {
     bridge.send("VKWebAppShare", {
-      link: "https://vk.com/app7713167#test-depression",
+      link: "https://vk.com/app7713167#test-eq",
     });
   }
 
@@ -140,33 +165,45 @@ class EQTest extends React.Component {
               {q}
               <button
                 className="AnswerBtn"
-                onClick={(e) => this.setNextQuestion(1, e)}
+                onClick={(e) => this.setNextQuestion(3, e)}
               >
-                никогда или изредка
+                Полностью согласен
               </button>
               <button
                 className="AnswerBtn"
                 onClick={(e) => this.setNextQuestion(2, e)}
               >
-                иногда
+                В основном согласен
               </button>
               <button
                 className="AnswerBtn"
-                onClick={(e) => this.setNextQuestion(3, e)}
+                onClick={(e) => this.setNextQuestion(1, e)}
               >
-                часто
+                Отчасти согласен
               </button>
               <button
                 className="AnswerBtn"
-                onClick={(e) => this.setNextQuestion(4, e)}
+                onClick={(e) => this.setNextQuestion(-1, e)}
               >
-                почти всегда или постоянно
+                Отчасти не согласен
+              </button>
+              <button
+                className="AnswerBtn"
+                onClick={(e) => this.setNextQuestion(-2, e)}
+              >
+                В основном не согласен
+              </button>
+              <button
+                className="AnswerBtn"
+                onClick={(e) => this.setNextQuestion(-3, e)}
+              >
+                Полностью не согласен
               </button>
             </div>
           ) : (
             <div>
               <div className="Text">{this.state.text}</div>
-              <div className="TextResults">уровень депрессии (из 100):</div>
+              <div className="TextResults">уровень EQ (из 100):</div>
               <div className="ScoresResults">{results.scores}</div>
               <div className="progress" style={{ height: 12 + "px" }}>
                 <div
@@ -176,6 +213,52 @@ class EQTest extends React.Component {
                 ></div>
               </div>
               <div className="TextResults">{results.text}</div>
+              <br />
+              <br />
+              <span>Эмоциональная осведомленность</span>
+              <div className="progress" style={{ height: 15 + "px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{ width: results.p1 + "%", backgroundColor: "#FFB99D" }}
+                ></div>
+              </div>
+              <br />
+              <span>Управление своими эмоциями</span>
+              <div className="progress" style={{ height: 15 + "px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{ width: results.p2 + "%", backgroundColor: "#FFF59D" }}
+                ></div>
+              </div>
+              <br />
+              <span>Самомотивация</span>
+              <div className="progress" style={{ height: 15 + "px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{ width: results.p3 + "%", backgroundColor: "#AFFF9D" }}
+                ></div>
+              </div>
+              <br />
+              <span>Эмпатия</span>
+              <div className="progress" style={{ height: 15 + "px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{ width: results.p4 + "%", backgroundColor: "#E69DFF" }}
+                ></div>
+              </div>
+              <br />
+              <span>Распознавание эмоций других людей</span>
+              <div className="progress" style={{ height: 15 + "px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{ width: results.p4 + "%", backgroundColor: "#7DBAFF" }}
+                ></div>
+              </div>
             </div>
           )}
         </div>
@@ -187,15 +270,13 @@ class EQTest extends React.Component {
           ""
         )}
         {showResults ? (
-          <div>
+          <div style={{ textAlign: "center" }}>
             <div className="icon" onClick={this.shareTest}>
               <i className="fas fa-share-square"></i>
-              <div className="iconTitle">поделиться тестом</div>
             </div>
             <NavLink to="/" className="linkStyle">
               <div className="icon">
                 <i className="fas fa-stream"></i>
-                <div className="iconTitle">вернуться к тестам</div>
               </div>
             </NavLink>
           </div>

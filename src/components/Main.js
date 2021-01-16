@@ -7,6 +7,7 @@ import Transition from "react-transition-group/Transition";
 import DepressionTest from "./DepressionTest";
 import EmpathyTest from "./EmpathyTest";
 import ColorLoveTest from "./ColorLoveTest";
+import EQTest from "./EQTest";
 
 import "../App.css";
 
@@ -153,6 +154,9 @@ class Main extends React.Component {
               </Route>
               <Route exact path="/test-colorlove">
                 <ColorLoveTest />
+              </Route>
+              <Route exact path="/test-eq">
+                <EQTest />
               </Route>
             </Switch>
           </HashRouter>
