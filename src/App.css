@@ -13,6 +13,21 @@
   height: 4px;
 }
 
+.testView-enter {
+  opacity: 0;
+}
+.testView-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.testView-exit {
+  opacity: 1;
+}
+.testView-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
 .modal-dialog-centered.modal-dialog-scrollable .modal-content {
   max-height: 80%;
   -webkit-overflow-scrolling: touch;
@@ -51,7 +66,7 @@
   padding: 0px 10px 20px 10px;
 }
 
-.testView {
+.testView-entering {
   position: relative;
   width: 95%;
   margin: 25px 10px;
@@ -60,6 +75,21 @@
   background-color: white;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.testView-entered {
+  position: relative;
+  width: 95%;
+  margin: 25px 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 
 .testTitle {

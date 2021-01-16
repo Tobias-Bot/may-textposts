@@ -2,6 +2,7 @@ import React from "react";
 //import bridge from "@vkontakte/vk-bridge";
 import qs from "querystring";
 import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
+import Transition from "react-transition-group/Transition";
 
 import DepressionTest from "./DepressionTest";
 import EmpathyTest from "./EmpathyTest";
@@ -17,15 +18,24 @@ class Main extends React.Component {
     this.state = {
       testInfo: "",
       headerStyles: {},
+
+      show: false,
     };
 
     this.getTests = this.getTests.bind(this);
     this.setModalText = this.setModalText.bind(this);
     this.getHeaderStyle = this.getHeaderStyle.bind(this);
+    this.showAnimation = this.showAnimation.bind(this);
   }
 
   componentDidMount() {
     this.setState({ headerStyles: this.getHeaderStyle() });
+
+    this.showAnimation();
+  }
+
+  showAnimation() {
+    this.setState({ show: true });
   }
 
   getHeaderStyle() {
@@ -41,7 +51,7 @@ class Main extends React.Component {
           paddingTop: "30px",
         },
         body: {
-          paddingTop: "70px",
+          paddingTop: "20px",
         },
       };
     } else {
@@ -56,35 +66,42 @@ class Main extends React.Component {
   getTests() {
     let response = testsInfo.map((test, i) => {
       return (
-        <div
-          key={i}
-          className="testView"
-          style={{ backgroundColor: test.color }}
-        >
-          <div className="testTitle">{test.title}</div>
-          <button
-            type="button"
-            className="infoBtn"
-            style={{ backgroundColor: test.color }}
-            data-toggle="modal"
-            data-target="#infoModal"
-            onClick={(e) => this.setModalText(test.text, e)}
-          >
-            <i className="fas fa-info-circle"></i> инфо
-          </button>
-          <br />
-          <NavLink to={test.url}>
-            <button
-              type="button"
-              className="testComeInBtn"
-              style={{ borderColor: test.color, color: test.color }}
-            >
-              пройти тест
-            </button>
-          </NavLink>
-          <div className="testCount">
-            кол-во вопросов: {test.questionsCount}
-          </div>
+        <div key={i}>
+          <Transition in={this.state.show} timeout={500 + i * 200}>
+            {(state) => {
+              return (
+                <div
+                  className={"testView" + "-" + state}
+                  style={{ backgroundColor: test.color }}
+                >
+                  <div className="testTitle">{test.title}</div>
+                  <button
+                    type="button"
+                    className="infoBtn"
+                    style={{ backgroundColor: test.color }}
+                    data-toggle="modal"
+                    data-target="#infoModal"
+                    onClick={(e) => this.setModalText(test.text, e)}
+                  >
+                    <i className="fas fa-info-circle"></i> инфо
+                  </button>
+                  <br />
+                  <NavLink to={test.url}>
+                    <button
+                      type="button"
+                      className="testComeInBtn"
+                      style={{ borderColor: test.color, color: test.color }}
+                    >
+                      пройти тест
+                    </button>
+                  </NavLink>
+                  <div className="testCount">
+                    кол-во вопросов: {test.questionsCount}
+                  </div>
+                </div>
+              );
+            }}
+          </Transition>
         </div>
       );
     });
