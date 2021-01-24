@@ -127,6 +127,7 @@ class DepressionTest extends React.Component {
     let q = this.getQuestion();
     let showResults = this.state.showResults;
     let results = {};
+    let testName = this.props.name;
 
     if (this.state.text === "результаты теста") {
       results = this.getTestResults();
@@ -134,6 +135,7 @@ class DepressionTest extends React.Component {
 
     return (
       <div>
+        <div className="infoText">{testName}</div>
         <div className="QuestionView">
           {!showResults ? (
             <div>

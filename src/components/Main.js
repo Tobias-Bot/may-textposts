@@ -1,5 +1,5 @@
 import React from "react";
-//import bridge from "@vkontakte/vk-bridge";
+import bridge from "@vkontakte/vk-bridge";
 import qs from "querystring";
 import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
 import Transition from "react-transition-group/Transition";
@@ -27,6 +27,7 @@ class Main extends React.Component {
     this.setModalText = this.setModalText.bind(this);
     this.getHeaderStyle = this.getHeaderStyle.bind(this);
     this.showAnimation = this.showAnimation.bind(this);
+    this.openMainApp = this.openMainApp.bind(this);
   }
 
   componentDidMount() {
@@ -64,11 +65,15 @@ class Main extends React.Component {
     this.setState({ testInfo: text });
   }
 
+  openMainApp() {
+    bridge.send("VKWebAppOpenApp", { app_id: 7646928 });
+  }
+
   getTests() {
     let response = testsInfo.map((test, i) => {
       return (
         <div key={i}>
-          <Transition in={this.state.show} timeout={500 + i * 200}>
+          <Transition in={this.state.show} timeout={100 + i * 150}>
             {(state) => {
               return (
                 <div
@@ -138,7 +143,10 @@ class Main extends React.Component {
         </div>
 
         <div className="Header" style={styles.header}>
-          Мαú-тесты
+          <span className="titleMark" onClick={this.openMainApp}>
+            Мαú
+          </span>{" "}
+          <span className="titleApp">тесты</span>
         </div>
         <div className="Body" style={styles.body}>
           <HashRouter>
@@ -147,20 +155,25 @@ class Main extends React.Component {
                 {tests}
               </Route>
               <Route exact path="/test-depression">
-                <DepressionTest />
+                <DepressionTest name="тест на уровень депрессии" />
               </Route>
               <Route exact path="/test-empathy">
-                <EmpathyTest />
+                <EmpathyTest name="тест на уровень эмпатии" />
               </Route>
               <Route exact path="/test-colorlove">
-                <ColorLoveTest />
+                <ColorLoveTest name="как ты любишь" />
               </Route>
               <Route exact path="/test-eq">
-                <EQTest />
+                <EQTest name="тест на уровень эмоционального интеллекта" />
               </Route>
             </Switch>
           </HashRouter>
-          <a href="https://vk.com/warmay" className="linkStyle">
+          <a
+            href="https://vk.com/warmay"
+            className="linkStyle"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div className="copyrightText">Май</div>
           </a>
         </div>
