@@ -77,7 +77,7 @@ class Main extends React.Component {
             {(state) => {
               return (
                 <div
-                  className={"testView" + "-" + state}
+                  className={"testView-" + state}
                   style={{ backgroundColor: test.color }}
                 >
                   <div className="testTitle">{test.title}</div>
