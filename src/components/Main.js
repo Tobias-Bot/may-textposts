@@ -8,6 +8,7 @@ import DepressionTest from "./DepressionTest";
 import EmpathyTest from "./EmpathyTest";
 import ColorLoveTest from "./ColorLoveTest";
 import EQTest from "./EQTest";
+import SelfValueTest from "./SelfValueTest";
 
 import "../App.css";
 
@@ -165,6 +166,9 @@ class Main extends React.Component {
               </Route>
               <Route exact path="/test-eq">
                 <EQTest name="тест на уровень эмоционального интеллекта" />
+              </Route>
+              <Route exact path="/test-selfvalue">
+                <SelfValueTest name="тест на уровень самоценности" />
               </Route>
             </Switch>
           </HashRouter>

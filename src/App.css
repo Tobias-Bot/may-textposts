@@ -86,7 +86,8 @@
 .testView-entering {
   position: relative;
   width: 95%;
-  margin: 0px 10px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 0px;
   border-radius: 10px;
   background-color: white;
@@ -98,7 +99,9 @@
 .testView-entered {
   position: relative;
   width: 95%;
-  margin: 20px 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 20px 0px;
   padding: 10px;
   border-radius: 10px;
   background-color: white;

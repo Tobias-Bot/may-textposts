@@ -222,7 +222,10 @@ class EQTest extends React.Component {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: results.p1 + "%", backgroundColor: "#FFB99D" }}
+                  style={{
+                    width: results.p1 + "%",
+                    backgroundColor: "#FFB99D",
+                  }}
                 ></div>
               </div>
               <br />
@@ -231,7 +234,10 @@ class EQTest extends React.Component {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: results.p2 + "%", backgroundColor: "#FFF59D" }}
+                  style={{
+                    width: results.p2 + "%",
+                    backgroundColor: "#FFF59D",
+                  }}
                 ></div>
               </div>
               <br />
@@ -240,7 +246,10 @@ class EQTest extends React.Component {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: results.p3 + "%", backgroundColor: "#AFFF9D" }}
+                  style={{
+                    width: results.p3 + "%",
+                    backgroundColor: "#AFFF9D",
+                  }}
                 ></div>
               </div>
               <br />
@@ -249,7 +258,10 @@ class EQTest extends React.Component {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: results.p4 + "%", backgroundColor: "#E69DFF" }}
+                  style={{
+                    width: results.p4 + "%",
+                    backgroundColor: "#E69DFF",
+                  }}
                 ></div>
               </div>
               <br />
@@ -258,7 +270,10 @@ class EQTest extends React.Component {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: results.p4 + "%", backgroundColor: "#7DBAFF" }}
+                  style={{
+                    width: results.p4 + "%",
+                    backgroundColor: "#7DBAFF",
+                  }}
                 ></div>
               </div>
             </div>
@@ -276,7 +291,15 @@ class EQTest extends React.Component {
             <div className="icon" onClick={this.shareTest}>
               <i className="fas fa-share-square"></i>
             </div>
-            <NavLink to="/" className="linkStyle">
+            <NavLink
+              to="/"
+              className="linkStyle"
+              onClick={() =>
+                setTimeout(() => {
+                  bridge.send("VKWebAppJoinGroup", { group_id: 160404048 });
+                }, 1000)
+              }
+            >
               <div className="icon">
                 <i className="fas fa-stream"></i>
               </div>

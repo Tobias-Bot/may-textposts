@@ -329,7 +329,15 @@ class ColorLoveTest extends React.Component {
             <div className="icon" onClick={this.shareTest}>
               <i className="fas fa-share-square"></i>
             </div>
-            <NavLink to="/" className="linkStyle">
+            <NavLink
+              to="/"
+              className="linkStyle"
+              onClick={() =>
+                setTimeout(() => {
+                  bridge.send("VKWebAppJoinGroup", { group_id: 160404048 });
+                }, 1000)
+              }
+            >
               <div className="icon">
                 <i className="fas fa-stream"></i>
               </div>
