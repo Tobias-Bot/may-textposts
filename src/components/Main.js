@@ -162,23 +162,13 @@ class Main extends React.Component {
             Мαú
           </span>{" "}
           <span className="titleApp">тесты</span>
-          <HashRouter>
+          {/* <HashRouter>
             <NavLink className="linkStyle" to="/info">
               <span className="headerBtn">
                 <i className="fas fa-info-circle"></i>
               </span>
             </NavLink>
-            <NavLink className="linkStyle" to="/profile">
-              <span className="headerBtn">
-                <i className="fas fa-user"></i>
-              </span>
-            </NavLink>
-            <NavLink className="linkStyle" to="/">
-              <span className="headerBtn">
-                <i className="fas fa-home"></i>
-              </span>
-            </NavLink>
-          </HashRouter>
+          </HashRouter> */}
         </div>
         <div className="Body" style={styles.body}>
           <HashRouter>
@@ -202,7 +192,10 @@ class Main extends React.Component {
                 <ColorLoveTest name="как ты любишь" id={2} />
               </Route>
               <Route exact path="/test-eq">
-                <EQTest name="тест на уровень эмоционального интеллекта" id={3} />
+                <EQTest
+                  name="тест на уровень эмоционального интеллекта"
+                  id={3}
+                />
               </Route>
               <Route exact path="/test-selfvalue">
                 <SelfValueTest name="тест на уровень самоценности" id={4} />
@@ -217,6 +210,25 @@ class Main extends React.Component {
           >
             <div className="copyrightText">Май</div>
           </a>
+        </div>
+        <div className="footer">
+          <HashRouter>
+            <NavLink className="linkStyle" to="/info">
+              <div className="btnFooter">
+                <i className="fas fa-info-circle"></i>
+              </div>
+            </NavLink>
+            <NavLink className="linkStyle" to="/">
+              <div className="btnFooter">
+                <i className="fas fa-home"></i>
+              </div>
+            </NavLink>
+            <NavLink className="linkStyle" to="/profile">
+              <div className="btnFooter">
+                <i className="fas fa-user"></i>
+              </div>
+            </NavLink>
+          </HashRouter>
         </div>
       </div>
     );

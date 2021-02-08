@@ -2,6 +2,8 @@ import React from "react";
 import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
+import testsInfo from "../data/testsInfo";
+
 import "../styles/TestPage.css";
 
 class ColorLoveTest extends React.Component {
@@ -25,6 +27,7 @@ class ColorLoveTest extends React.Component {
     this.getTestResults = this.getTestResults.bind(this);
     this.shareTest = this.shareTest.bind(this);
     this.setAnswer = this.setAnswer.bind(this);
+    this.saveTestResults = this.saveTestResults.bind(this);
   }
 
   setAnswer(color) {
@@ -38,6 +41,8 @@ class ColorLoveTest extends React.Component {
   getTestResults() {
     let color = this.state.answerSum;
     let text = "";
+
+    this.saveTestResults(color);
 
     switch (true) {
       case color === "magenta":
@@ -191,6 +196,16 @@ class ColorLoveTest extends React.Component {
   shareTest() {
     bridge.send("VKWebAppShare", {
       link: "https://vk.com/app7713167#test-colorlove",
+    });
+  }
+
+  saveTestResults(res) {
+    let index = testsInfo.findIndex((test) => test.id === this.props.id);
+    let test = testsInfo[index];
+
+    bridge.send("VKWebAppStorageSet", {
+      key: test.url.substring(1, test.url.length),
+      value: `${res}`,
     });
   }
 

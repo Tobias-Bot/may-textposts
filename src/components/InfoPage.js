@@ -32,14 +32,6 @@ class InfoPage extends React.Component {
         <div className="btnsBackground">
           <div className="row mb-4">
             <div className="col">
-              <NavLink className="linkStyle" to="/profile">
-                <div className="iconMain">
-                  <i className="fas fa-user"></i>
-                  <span className="iconTitle">профиль</span>
-                </div>
-              </NavLink>
-            </div>
-            <div className="col">
               <div className="iconMain" onClick={this.shareApp}>
                 <i className="fas fa-share-square"></i>
                 <span className="iconTitle">поделиться</span>

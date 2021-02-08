@@ -22,6 +22,7 @@ class UserPage extends React.Component {
     this.getUserVkData = this.getUserVkData.bind(this);
     this.getTestResults = this.getTestResults.bind(this);
     this.loadTestResults = this.loadTestResults.bind(this);
+    this.getCompleteTestsCount = this.getCompleteTestsCount.bind(this);
   }
 
   componentDidMount() {
@@ -98,15 +99,37 @@ class UserPage extends React.Component {
     return response;
   }
 
+  getCompleteTestsCount() {
+    let i = 0;
+    let results = this.state.UserResults;
+
+    for (let key in results) {
+      if (results[key]) i++;
+    }
+
+    return i;
+  }
+
   render() {
     let userInfo = this.state.UserInfo;
     let results = this.getTestResults();
+    let complete = this.getCompleteTestsCount();
 
     return (
       <div>
         <div className="ProfileCard">
-          <img className="UserPhoto" src={userInfo.photo} alt="avatar" />
-          <div className="UserName">{userInfo.name}</div>
+          <div className="row">
+            <div className="col-4">
+              <img className="UserPhoto" src={userInfo.photo} alt="avatar" />
+            </div>
+            <div className="col">
+              <div className="UserName">{userInfo.name}</div>
+              <br />
+              <div className="UserText">
+                пройдено тестов: {complete} из {testsInfo.length}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="TestResultsCard">{results}</div>
       </div>
