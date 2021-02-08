@@ -3,6 +3,7 @@ import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
 import SelfValueTestData from "../data/SelfValueTestData";
+import testsInfo from "../data/testsInfo";
 
 import "../styles/TestPage.css";
 
@@ -21,6 +22,7 @@ class SelfValueTest extends React.Component {
     this.setNextQuestion = this.setNextQuestion.bind(this);
     this.getTestResults = this.getTestResults.bind(this);
     this.shareTest = this.shareTest.bind(this);
+    this.saveTestResults = this.saveTestResults.bind(this);
   }
 
   getQuestion() {
@@ -75,6 +77,8 @@ class SelfValueTest extends React.Component {
     let scores = Math.round((sum * 100) / 27);
     let text = "";
 
+    this.saveTestResults(scores);
+
     switch (true) {
       case sum >= 21 && sum <= 27:
         text = `Ваша самоценность находится на достаточно высоком уровне. Вы не дадите
@@ -107,6 +111,16 @@ class SelfValueTest extends React.Component {
   shareTest() {
     bridge.send("VKWebAppShare", {
       link: "https://vk.com/app7713167#test-selfvalue",
+    });
+  }
+
+  saveTestResults(res) {
+    let index = testsInfo.findIndex((test) => test.id === this.props.id);
+    let test = testsInfo[index];
+
+    bridge.send("VKWebAppStorageSet", {
+      key: test.url.substring(1, test.url.length),
+      value: `${res}`,
     });
   }
 

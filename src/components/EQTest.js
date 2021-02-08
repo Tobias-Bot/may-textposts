@@ -3,6 +3,7 @@ import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
 import EQTestData from "../data/EQTestData";
+import testsInfo from "../data/testsInfo";
 
 import "../styles/TestPage.css";
 
@@ -27,6 +28,7 @@ class EQTest extends React.Component {
     this.setNextQuestion = this.setNextQuestion.bind(this);
     this.getTestResults = this.getTestResults.bind(this);
     this.shareTest = this.shareTest.bind(this);
+    this.saveTestResults = this.saveTestResults.bind(this);
   }
 
   getQuestion() {
@@ -119,6 +121,8 @@ class EQTest extends React.Component {
     let scores = Math.round((sum * 100) / 90);
     let text = "";
 
+    this.saveTestResults(scores);
+
     switch (true) {
       case sum >= 70:
         text = "Высокий уровень эмоционального интеллекта";
@@ -145,6 +149,16 @@ class EQTest extends React.Component {
   shareTest() {
     bridge.send("VKWebAppShare", {
       link: "https://vk.com/app7713167#test-eq",
+    });
+  }
+
+  saveTestResults(res) {
+    let index = testsInfo.findIndex((test) => test.id === this.props.id);
+    let test = testsInfo[index];
+
+    bridge.send("VKWebAppStorageSet", {
+      key: test.url.substring(1, test.url.length),
+      value: `${res}`,
     });
   }
 

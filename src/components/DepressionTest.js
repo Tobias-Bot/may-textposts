@@ -3,6 +3,7 @@ import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
 import DepressionTestData from "../data/DepressionTestData";
+import testsInfo from "../data/testsInfo";
 
 import "../styles/TestPage.css";
 
@@ -21,6 +22,7 @@ class DepressionTest extends React.Component {
     this.setNextQuestion = this.setNextQuestion.bind(this);
     this.getTestResults = this.getTestResults.bind(this);
     this.shareTest = this.shareTest.bind(this);
+    this.saveTestResults = this.saveTestResults.bind(this);
   }
 
   getQuestion() {
@@ -78,6 +80,8 @@ class DepressionTest extends React.Component {
     let scores = Math.round((sum * 100) / 80);
     let text = "";
 
+    this.saveTestResults(scores);
+
     switch (true) {
       case sum <= 50:
         text = "Состояние без депрессии";
@@ -120,6 +124,16 @@ class DepressionTest extends React.Component {
   shareTest() {
     bridge.send("VKWebAppShare", {
       link: "https://vk.com/app7713167#test-depression",
+    });
+  }
+
+  saveTestResults(res) {
+    let index = testsInfo.findIndex((test) => test.id === this.props.id);
+    let test = testsInfo[index];
+
+    bridge.send("VKWebAppStorageSet", {
+      key: test.url.substring(1, test.url.length),
+      value: `${res}`,
     });
   }
 

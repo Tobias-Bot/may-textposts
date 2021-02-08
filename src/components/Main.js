@@ -4,6 +4,8 @@ import qs from "querystring";
 import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
 import Transition from "react-transition-group/Transition";
 
+import InfoPage from "./InfoPage";
+import UserPage from "./UserPage";
 import DepressionTest from "./DepressionTest";
 import EmpathyTest from "./EmpathyTest";
 import ColorLoveTest from "./ColorLoveTest";
@@ -160,6 +162,23 @@ class Main extends React.Component {
             Мαú
           </span>{" "}
           <span className="titleApp">тесты</span>
+          <HashRouter>
+            <NavLink className="linkStyle" to="/info">
+              <span className="headerBtn">
+                <i className="fas fa-info-circle"></i>
+              </span>
+            </NavLink>
+            <NavLink className="linkStyle" to="/profile">
+              <span className="headerBtn">
+                <i className="fas fa-user"></i>
+              </span>
+            </NavLink>
+            <NavLink className="linkStyle" to="/">
+              <span className="headerBtn">
+                <i className="fas fa-home"></i>
+              </span>
+            </NavLink>
+          </HashRouter>
         </div>
         <div className="Body" style={styles.body}>
           <HashRouter>
@@ -167,20 +186,26 @@ class Main extends React.Component {
               <Route exact path="/">
                 {tests}
               </Route>
+              <Route exact path="/info">
+                <InfoPage />
+              </Route>
+              <Route exact path="/profile">
+                <UserPage />
+              </Route>
               <Route exact path="/test-depression">
-                <DepressionTest name="тест на уровень депрессии" />
+                <DepressionTest name="тест на уровень депрессии" id={1} />
               </Route>
               <Route exact path="/test-empathy">
-                <EmpathyTest name="тест на уровень эмпатии" />
+                <EmpathyTest name="тест на уровень эмпатии" id={0} />
               </Route>
               <Route exact path="/test-colorlove">
-                <ColorLoveTest name="как ты любишь" />
+                <ColorLoveTest name="как ты любишь" id={2} />
               </Route>
               <Route exact path="/test-eq">
-                <EQTest name="тест на уровень эмоционального интеллекта" />
+                <EQTest name="тест на уровень эмоционального интеллекта" id={3} />
               </Route>
               <Route exact path="/test-selfvalue">
-                <SelfValueTest name="тест на уровень самоценности" />
+                <SelfValueTest name="тест на уровень самоценности" id={4} />
               </Route>
             </Switch>
           </HashRouter>

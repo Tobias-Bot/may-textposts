@@ -3,6 +3,7 @@ import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
 import EmpathyTestData from "../data/EmpathyTestData";
+import testsInfo from "../data/testsInfo";
 
 import "../styles/TestPage.css";
 
@@ -21,6 +22,7 @@ class EmpathyTest extends React.Component {
     this.setNextQuestion = this.setNextQuestion.bind(this);
     this.getTestResults = this.getTestResults.bind(this);
     this.shareTest = this.shareTest.bind(this);
+    this.saveTestResults = this.saveTestResults.bind(this);
   }
 
   getQuestion() {
@@ -81,6 +83,8 @@ class EmpathyTest extends React.Component {
     let sum = this.state.answerSum;
     let scores = Math.round((sum * 100) / 90);
     let text = "";
+
+    this.saveTestResults(scores);
 
     switch (true) {
       case sum >= 82 && sum <= 90:
@@ -150,6 +154,16 @@ class EmpathyTest extends React.Component {
   shareTest() {
     bridge.send("VKWebAppShare", {
       link: "https://vk.com/app7713167#test-empathy",
+    });
+  }
+
+  saveTestResults(res) {
+    let index = testsInfo.findIndex((test) => test.id === this.props.id);
+    let test = testsInfo[index];
+
+    bridge.send("VKWebAppStorageSet", {
+      key: test.url.substring(1, test.url.length),
+      value: `${res}`,
     });
   }
 
