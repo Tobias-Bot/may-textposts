@@ -92,6 +92,18 @@ class Main extends React.Component {
                   >
                     <i className="fas fa-info-circle"></i> инфо
                   </button>
+                  <button
+                    type="button"
+                    className="infoBtn"
+                    style={{ backgroundColor: test.color }}
+                    onClick={() =>
+                      bridge.send("VKWebAppShare", {
+                        link: `https://vk.com/app7713167#${test.url}`,
+                      })
+                    }
+                  >
+                    <i className="fas fa-share-square"></i> отправить
+                  </button>
                   <br />
                   <NavLink to={test.url}>
                     <button
