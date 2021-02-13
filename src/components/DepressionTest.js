@@ -64,6 +64,8 @@ class DepressionTest extends React.Component {
           case 4:
             sum += 1;
             break;
+          default:
+            break;
         }
       } else {
         sum += score;
@@ -112,6 +114,8 @@ class DepressionTest extends React.Component {
         отсутствие энергии, расстройства сна и аппетита, суицидальные тенденции. Тяжёлые формы
         депрессии характеризуются так называемой «депрессивной триадой»: снижением настроения,
         заторможенностью мышления и двигательной заторможенностью.`;
+        break;
+      default:
         break;
     }
 

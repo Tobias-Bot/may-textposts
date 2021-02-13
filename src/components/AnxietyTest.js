@@ -2,12 +2,12 @@ import React from "react";
 import bridge from "@vkontakte/vk-bridge";
 import { NavLink } from "react-router-dom";
 
-import SelfValueTestData from "../data/SelfValueTestData";
+import AnxietyTestData from "../data/AnxietyTestData";
 import testsInfo from "../data/testsInfo";
 
 import "../styles/TestPage.css";
 
-class SelfValueTest extends React.Component {
+class AnxietyTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,9 +27,9 @@ class SelfValueTest extends React.Component {
 
   getQuestion() {
     let index = this.state.questionNum;
-    let len = SelfValueTestData.length;
+    let len = AnxietyTestData.length;
 
-    let q = SelfValueTestData[index - 1];
+    let q = AnxietyTestData[index - 1];
 
     let btns = q.btns.map((b, i) => {
       return (
@@ -61,8 +61,8 @@ class SelfValueTest extends React.Component {
     let questionNum = this.state.questionNum + 1;
     let sum = this.state.answerSum;
 
-    if (questionNum <= SelfValueTestData.length) {
-      let text = SelfValueTestData[questionNum - 1].text;
+    if (questionNum <= AnxietyTestData.length) {
+      let text = AnxietyTestData[questionNum - 1].text;
 
       sum += score;
 
@@ -74,31 +74,26 @@ class SelfValueTest extends React.Component {
 
   getTestResults() {
     let sum = this.state.answerSum;
-    let scores = Math.round((sum * 100) / 27);
+    let scores = Math.round((sum * 100) / 49);
     let text = "";
 
     this.saveTestResults(scores);
 
     switch (true) {
-      case sum >= 21 && sum <= 27:
-        text = `Ваша самоценность находится на достаточно высоком уровне. Вы не дадите
-        себя в обиду и сможете о себе позаботиться. Вы слышите себя и ориентируетесь
-        на свои чувства и желания в принятии решений. Есть моменты над которыми еще
-        можно поработать, но в целом у вас есть ощущение, что вы себе важны и ценны.`;
+      case sum > 39 && sum <= 49:
+        text = `Очень высокий уровень тревоги`;
         break;
-      case sum >= 11 && sum <= 20:
-        text = `Ваша самоценность напоминает море в период приливов и отливов. Если
-        вокруг все спокойно и вы довольны тем, как идут дела, то вы себя цените и
-        одобряете. Как только что-то идет не так, вы склонны начать критиковать себя
-        или ругать за ошибки. Если вы повысите свою самоценность, то внутри почувствуете
-        больше гармонии, спокойствия и удовлетворенности собой. А изменения к лучшему в
-        отношениях, карьере, деньгах и здоровье не заставят себя долго ждать.`;
+      case sum > 24 && sum <= 39:
+        text = `Высокий уровень тревоги`;
         break;
-      case sum >= 0 && sum <= 10:
-        text = `Вы почти не цените себя. Для этого вам нужен веский повод. Чаще всего вы
-        слышите голос внутреннего критика, который говорит о том, что вы опять все сделали
-        не так. Вы уже смирились с тем, что не достаточно хороши, чтобы жить счастливо и
-        привыкли терпеть лишения. Внутри много напряжения, грусти и безысходности.`;
+      case sum > 14 && sum <= 24:
+        text = `Средний уровень тревоги (с тенденцией к высокому)`;
+        break;
+      case sum > 4 && sum <= 14:
+        text = `Средний уровень тревоги (с тенденцией к низкому)`;
+        break;
+      case sum >= 0 && sum <= 4:
+        text = `Низкий уровень тревоги`;
         break;
       default:
         break;
@@ -112,7 +107,7 @@ class SelfValueTest extends React.Component {
 
   shareTest() {
     bridge.send("VKWebAppShare", {
-      link: "https://vk.com/app7713167#test-selfvalue",
+      link: "https://vk.com/app7713167#test-anxiety",
     });
   }
 
@@ -145,7 +140,7 @@ class SelfValueTest extends React.Component {
           ) : (
             <div>
               <div className="Text">{this.state.text}</div>
-              <div className="TextResults">уровень самоценности (из 100):</div>
+              <div className="TextResults">уровень тревожности (из 100):</div>
               <div className="ScoresResults">{results.scores}</div>
               <div className="progress" style={{ height: 12 + "px" }}>
                 <div
@@ -191,4 +186,4 @@ class SelfValueTest extends React.Component {
   }
 }
 
-export default SelfValueTest;
+export default AnxietyTest;

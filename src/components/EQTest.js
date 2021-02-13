@@ -133,6 +133,8 @@ class EQTest extends React.Component {
       case sum <= 39:
         text = "Низкий уровень эмоционального интеллекта";
         break;
+      default:
+        break;
     }
 
     return {

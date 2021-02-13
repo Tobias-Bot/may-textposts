@@ -2,7 +2,6 @@ import React from "react";
 import bridge from "@vkontakte/vk-bridge";
 
 import "../App.css";
-import { NavLink } from "react-router-dom";
 
 class InfoPage extends React.Component {
   constructor(props) {

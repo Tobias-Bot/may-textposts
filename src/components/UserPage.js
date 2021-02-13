@@ -53,8 +53,6 @@ class UserPage extends React.Component {
           else res[item.key] = "";
         }
 
-        console.log(res);
-
         this.setState({ UserResults: res });
       });
   }

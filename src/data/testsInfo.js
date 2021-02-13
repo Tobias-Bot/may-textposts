@@ -1,5 +1,15 @@
 const testsInfo = [
   {
+    id: 5,
+    title: "Уровень тревожности",
+    text: `Личностная шкала проявлений тревоги Тейлора предназначена для измерения
+    проявлений тревожности. Опубликована Дж. Тейлор в 1953 г.`,
+    questionsCount: 49,
+    url: "/test-anxiety",
+    color: "#FFA5C1",
+    results: true,
+  },
+  {
     id: 4,
     title: "Уровень самоценности",
     text: `Cамооценка это то, как мы себя оцениваем. При этом мы часто опираемся на
@@ -24,7 +34,7 @@ const testsInfo = [
     самосовершенствованию.`,
     questionsCount: 30,
     url: "/test-eq",
-    color: "#E2FFC4",
+    color: "#BCEA8B",
     results: true,
   },
   {

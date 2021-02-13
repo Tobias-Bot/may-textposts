@@ -143,6 +143,8 @@ class EmpathyTest extends React.Component {
         Болезненно переносите критику в свой адрес, хотя можете на нее бурно не реагировать.
         Необходима гимнастика чувств.`;
         break;
+      default:
+        break;
     }
 
     return {

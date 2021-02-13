@@ -11,6 +11,7 @@ import EmpathyTest from "./EmpathyTest";
 import ColorLoveTest from "./ColorLoveTest";
 import EQTest from "./EQTest";
 import SelfValueTest from "./SelfValueTest";
+import AnxietyTest from "./AnxietyTest";
 
 import "../App.css";
 
@@ -199,6 +200,9 @@ class Main extends React.Component {
               </Route>
               <Route exact path="/test-selfvalue">
                 <SelfValueTest name="тест на уровень самоценности" id={4} />
+              </Route>
+              <Route exact path="/test-anxiety">
+                <AnxietyTest name="тест на уровень тревожности" id={5} />
               </Route>
             </Switch>
           </HashRouter>
