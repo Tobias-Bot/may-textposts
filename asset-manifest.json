@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/may-textposts/static/css/main.bd329b85.chunk.css",
+    "main.js": "/may-textposts/static/js/main.74a58b31.chunk.js",
+    "main.js.map": "/may-textposts/static/js/main.74a58b31.chunk.js.map",
+    "runtime-main.js": "/may-textposts/static/js/runtime-main.cb5431c4.js",
+    "runtime-main.js.map": "/may-textposts/static/js/runtime-main.cb5431c4.js.map",
+    "static/js/2.81e27132.chunk.js": "/may-textposts/static/js/2.81e27132.chunk.js",
+    "static/js/2.81e27132.chunk.js.map": "/may-textposts/static/js/2.81e27132.chunk.js.map",
+    "index.html": "/may-textposts/index.html",
+    "static/css/main.bd329b85.chunk.css.map": "/may-textposts/static/css/main.bd329b85.chunk.css.map",
+    "static/js/2.81e27132.chunk.js.LICENSE.txt": "/may-textposts/static/js/2.81e27132.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/may-textposts/static/media/Caveat-SemiBold.e7ed0c9b.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cb5431c4.js",
+    "static/js/2.81e27132.chunk.js",
+    "static/css/main.bd329b85.chunk.css",
+    "static/js/main.74a58b31.chunk.js"
+  ]
+}
