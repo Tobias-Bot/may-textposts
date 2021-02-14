@@ -110,6 +110,8 @@ class UserPage extends React.Component {
 
   render() {
     let userInfo = this.state.UserInfo;
+    let p = this.state.UserResults;
+    let person = p["test-persontype"] ? JSON.parse(p["test-persontype"]) : "";
     let results = this.getTestResults();
     let complete = this.getCompleteTestsCount();
 
@@ -126,6 +128,20 @@ class UserPage extends React.Component {
               <div className="UserText">
                 пройдено тестов: {complete} из {testsInfo.length}
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="ProfileCardTest">
+          <div className="row">
+            <div className="col-3">
+              <img
+                className="CardPhoto"
+                src={person.pic}
+                alt="avatar"
+              />
+            </div>
+            <div className="col">
+              <div className="CardText">{person.p}</div>
             </div>
           </div>
         </div>

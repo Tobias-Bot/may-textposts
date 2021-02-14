@@ -12,6 +12,7 @@ import ColorLoveTest from "./ColorLoveTest";
 import EQTest from "./EQTest";
 import SelfValueTest from "./SelfValueTest";
 import AnxietyTest from "./AnxietyTest";
+import PersonTypeTest from "./PersonTypeTest";
 
 import "../App.css";
 
@@ -89,8 +90,8 @@ class Main extends React.Component {
                     type="button"
                     className="infoBtn"
                     style={{ backgroundColor: test.color }}
-                    data-toggle="modal"
-                    data-target="#infoModal"
+                    data-bs-toggle="modal"
+                    data-bs-target="#infoModal"
                     onClick={(e) => this.setModalText(test.text, e)}
                   >
                     <i className="fas fa-info-circle"></i> инфо
@@ -144,12 +145,10 @@ class Main extends React.Component {
                 <h5 className="modal-title">О тесте</h5>
                 <button
                   type="button"
-                  className="close"
-                  data-dismiss="modal"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
                   aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                ></button>
               </div>
               <div className="modal-body">
                 <div className="testText">{this.state.testInfo}</div>
@@ -184,25 +183,28 @@ class Main extends React.Component {
                 <UserPage />
               </Route>
               <Route exact path="/test-depression">
-                <DepressionTest name="тест на уровень депрессии" id={1} />
+                <DepressionTest name="Тест на уровень депрессии" id={1} />
               </Route>
               <Route exact path="/test-empathy">
-                <EmpathyTest name="тест на уровень эмпатии" id={0} />
+                <EmpathyTest name="Тест на уровень эмпатии" id={0} />
               </Route>
               <Route exact path="/test-colorlove">
-                <ColorLoveTest name="как ты любишь" id={2} />
+                <ColorLoveTest name="Как ты любишь" id={2} />
               </Route>
               <Route exact path="/test-eq">
                 <EQTest
-                  name="тест на уровень эмоционального интеллекта"
+                  name="Тест на уровень эмоционального интеллекта"
                   id={3}
                 />
               </Route>
               <Route exact path="/test-selfvalue">
-                <SelfValueTest name="тест на уровень самоценности" id={4} />
+                <SelfValueTest name="Тест на уровень самоценности" id={4} />
               </Route>
               <Route exact path="/test-anxiety">
-                <AnxietyTest name="тест на уровень тревожности" id={5} />
+                <AnxietyTest name="Тест на уровень тревожности" id={5} />
+              </Route>
+              <Route exact path="/test-persontype">
+                <PersonTypeTest name="Тест на тип личности" id={6} />
               </Route>
             </Switch>
           </HashRouter>

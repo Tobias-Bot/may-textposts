@@ -116,3 +116,20 @@
   color: #b9bfff;
   opacity: 0.3;
 }
+
+.form-range {
+  width: 100%;
+}
+
+.col {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.resultPic {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}

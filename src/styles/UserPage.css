@@ -36,6 +36,35 @@
   color: #dee1ff;
 }
 
+.ProfileCardTest {
+  position: relative;
+  width: 100%;
+  margin: 25px 0;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+.CardPhoto {
+  position: relative;
+  display: inline;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  border: 2px solid white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.CardText {
+  position: relative;
+  display: inline;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.95);
+}
+
 .TestResultsCard {
   position: relative;
   width: 100%;
