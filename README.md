@@ -10,6 +10,10 @@ React.js, HTML5, CSS3
 
 [watch the video](https://youtu.be/YB8Psk61zQg)
 
+# Try it on vk-mini-apps
+
+https://vk.com/app7713167
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
