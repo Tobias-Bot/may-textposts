@@ -1,3 +1,15 @@
+# Description
+
+Application for passing psychological tests. A total of 7 tests are available, for each of which there is a description, as well as the ability to share it on a social network. Indicators for each passed test are displayed on a separate page.
+
+# Used
+
+React.js, HTML5, CSS3
+
+# Review
+
+[watch the video](https://youtu.be/YB8Psk61zQg)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
